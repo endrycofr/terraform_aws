@@ -81,14 +81,16 @@ data "aws_subnets" "default" {
 }
 
 # AMI Amazon Linux 2023 terbaru
-data "aws_ami" "al2023" {
-  owners      = ["amazon"]
+data "aws_ami" "amazon_linux" {
   most_recent = true
   filter {
     name   = "name"
-    values = ["al2023-ami-*-x86_64"]
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]  # Amazon Linux 2 default AMI
   }
+
+  owners = ["137112412989"]  # Amazon
 }
+
 
 # User data untuk install httpd, clone repo, dan opsional runner
 locals {

@@ -1,0 +1,25 @@
+name: Deploy to EC2 via Self-hosted Runner
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Show runner hostname
+        run: hostname
+
+      - name: Update web content
+        run: |
+          APP_DIR=/var/www/html
+          cd "$APP_DIR"
+          git fetch origin main
+          git checkout main
+          git pull
+          # jika file ada di app/, salin ke root
+          if [ -f "$APP_DIR/app/index.html" ]; then
+            cp "$APP_DIR/app/index.html" "$APP_DIR/index.html"
+          fi
+          sudo systemctl restart httpd
