@@ -12,34 +12,45 @@ jobs:
       - name: Checkout repository (for local reference)
         uses: actions/checkout@v4
 
+      - name: Backup current version
+        run: |
+          APP_DIR=/var/www/html
+          BACKUP_DIR="/var/www/html_backup_$(date +'%Y%m%d_%H%M%S')"
+          echo "Membuat backup ke $BACKUP_DIR..."
+          if [ -d "$APP_DIR" ]; then
+            sudo cp -r "$APP_DIR" "$BACKUP_DIR"
+          fi
+
+      - name: Allow Git safe.directory
+        run: |
+          APP_DIR=/var/www/html
+          git config --global --add safe.directory "$APP_DIR"
+          sudo git config --system --add safe.directory "$APP_DIR"
+
       - name: Update /var/www/html with git pull --rebase or clone
         run: |
           APP_DIR=/var/www/html
           REPO_URL="https://github.com/endrycofr/terraform_aws.git"
           BRANCH="main"
+          - name: Mark repo dir as safe for Git
+          git config --global --add safe.directory /var/www/html
 
-          # Backup dir
-          BACKUP_DIR="/var/www/html_backup_$(date +'%Y%m%d_%H%M%S')"
-
-          echo "Cek KEberadaan .git di $APP_DIR..."
           if [ ! -d "$APP_DIR/.git" ]; then
             echo "Repo tidak valid atau hilang, cloning baru..."
             sudo rm -rf "$APP_DIR"
             sudo mkdir -p "$APP_DIR"
-            sudo git clone --branch "$BRANCH" "$REPO_URL" "$APP_DIR"
+            sudo chown -R $USER:$USER "$APP_DIR"
+            git clone --branch "$BRANCH" "$REPO_URL" "$APP_DIR"
           else
             echo "Repo valid, melakukan pull --rebase..."
             cd "$APP_DIR"
-            sudo git fetch origin "$BRANCH"
-            sudo git pull --rebase origin "$BRANCH"
+            git fetch origin "$BRANCH"
+            git pull --rebase origin "$BRANCH"
           fi
 
-      - name: Deploy to web root (sync & backup optional)
+      - name: Set permissions
         run: |
           APP_DIR=/var/www/html
-          echo "Menyinkronkan file ke web root..."
-          sudo mkdir -p "$APP_DIR"
-          sudo rsync -av --delete "$APP_DIR/" "$APP_DIR/"
           sudo chown -R apache:apache "$APP_DIR"
           sudo chmod -R 755 "$APP_DIR"
 
@@ -50,9 +61,12 @@ jobs:
         if: failure()
         run: |
           echo "Deploy gagal! Melakukan rollback..."
-          LAST_BACKUP=$(ls -td /var/www/html_backup_* | head -n1)
+          LAST_BACKUP=$(ls -td /var/www/html_backup_* 2>/dev/null | head -n1)
           if [ -n "$LAST_BACKUP" ]; then
-            sudo rsync -av --delete "$LAST_BACKUP/" /var/www/html/
+            sudo rm -rf /var/www/html
+            sudo cp -r "$LAST_BACKUP" /var/www/html
+            sudo chown -R apache:apache /var/www/html
+            sudo chmod -R 755 /var/www/html
             sudo systemctl restart httpd
             echo "Rollback berhasil dari $LAST_BACKUP"
           else
