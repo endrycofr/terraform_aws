@@ -99,6 +99,7 @@ locals {
     branch              = var.branch
     github_repo         = var.github_repo
     github_runner_token = var.github_runner_token
+    HOSTNAME            = "my-ec2-host"
   })
 }
 

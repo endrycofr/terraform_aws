@@ -6,7 +6,6 @@ set -euxo pipefail
 sudo yum -y update
 sudo yum -y install httpd git
 
-
 # Aktifkan httpd
 sudo systemctl enable httpd
 sudo systemctl start httpd
