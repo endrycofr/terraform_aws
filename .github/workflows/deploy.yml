@@ -27,7 +27,7 @@ jobs:
           git config --global --add safe.directory "$APP_DIR"
           sudo git config --system --add safe.directory "$APP_DIR"
 
-      - name: Update /var/www/html with git pull --rebase or clone
+      - name: Update /var/www/html with git reset and pull --rebase
         run: |
           APP_DIR=/var/www/html
           REPO_URL="https://github.com/endrycofr/terraform_aws.git"
@@ -42,8 +42,10 @@ jobs:
             mkdir -p "$APP_DIR"
             git clone --branch "$BRANCH" "$REPO_URL" "$APP_DIR"
           else
-            echo "Repo valid, melakukan pull --rebase..."
+            echo "Repo valid, membersihkan perubahan lokal..."
             cd "$APP_DIR"
+            git reset --hard
+            git clean -fd
             git fetch origin "$BRANCH"
             git pull --rebase origin "$BRANCH"
           fi
