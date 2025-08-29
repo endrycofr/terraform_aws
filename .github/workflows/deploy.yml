@@ -1,4 +1,4 @@
-name: Deploy to EC2 via Self-hosted Runner
+name: Safe Deploy with Rebase to EC2 via Self-hosted Runner
 
 on:
   push:
@@ -7,19 +7,54 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
-    steps:
-      - name: Show runner hostname
-        run: hostname
 
-      - name: Update web content
+    steps:
+      - name: Checkout repository (for local reference)
+        uses: actions/checkout@v4
+
+      - name: Update /var/www/html with git pull --rebase or clone
         run: |
           APP_DIR=/var/www/html
-          cd "$APP_DIR"
-          git fetch origin main
-          git checkout main
-          git pull
-          # jika file ada di app/, salin ke root
-          if [ -f "$APP_DIR/app/index.html" ]; then
-            cp "$APP_DIR/app/index.html" "$APP_DIR/index.html"
+          REPO_URL="https://github.com/endrycofr/terraform_aws.git"
+          BRANCH="main"
+
+          # Backup dir
+          BACKUP_DIR="/var/www/html_backup_$(date +'%Y%m%d_%H%M%S')"
+
+          echo "Cek KEberadaan .git di $APP_DIR..."
+          if [ ! -d "$APP_DIR/.git" ]; then
+            echo "Repo tidak valid atau hilang, cloning baru..."
+            sudo rm -rf "$APP_DIR"
+            sudo mkdir -p "$APP_DIR"
+            sudo git clone --branch "$BRANCH" "$REPO_URL" "$APP_DIR"
+          else
+            echo "Repo valid, melakukan pull --rebase..."
+            cd "$APP_DIR"
+            sudo git fetch origin "$BRANCH"
+            sudo git pull --rebase origin "$BRANCH"
           fi
-          sudo systemctl restart httpd
+
+      - name: Deploy to web root (sync & backup optional)
+        run: |
+          APP_DIR=/var/www/html
+          echo "Menyinkronkan file ke web root..."
+          sudo mkdir -p "$APP_DIR"
+          sudo rsync -av --delete "$APP_DIR/" "$APP_DIR/"
+          sudo chown -R apache:apache "$APP_DIR"
+          sudo chmod -R 755 "$APP_DIR"
+
+      - name: Restart Apache
+        run: sudo systemctl restart httpd
+
+      - name: Rollback on failure
+        if: failure()
+        run: |
+          echo "Deploy gagal! Melakukan rollback..."
+          LAST_BACKUP=$(ls -td /var/www/html_backup_* | head -n1)
+          if [ -n "$LAST_BACKUP" ]; then
+            sudo rsync -av --delete "$LAST_BACKUP/" /var/www/html/
+            sudo systemctl restart httpd
+            echo "Rollback berhasil dari $LAST_BACKUP"
+          else
+            echo "Tidak ada backup tersedia."
+          fi
