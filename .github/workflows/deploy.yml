@@ -33,11 +33,13 @@ jobs:
           REPO_URL="https://github.com/endrycofr/terraform_aws.git"
           BRANCH="main"
 
+          # Ambil kepemilikan sementara agar git bisa tulis
+          sudo chown -R $USER:$USER "$APP_DIR"
+
           if [ ! -d "$APP_DIR/.git" ]; then
             echo "Repo tidak valid atau hilang, cloning baru..."
             sudo rm -rf "$APP_DIR"
-            sudo mkdir -p "$APP_DIR"
-            sudo chown -R $USER:$USER "$APP_DIR"
+            mkdir -p "$APP_DIR"
             git clone --branch "$BRANCH" "$REPO_URL" "$APP_DIR"
           else
             echo "Repo valid, melakukan pull --rebase..."
@@ -46,7 +48,7 @@ jobs:
             git pull --rebase origin "$BRANCH"
           fi
 
-      - name: Set permissions
+      - name: Set permissions back to Apache
         run: |
           APP_DIR=/var/www/html
           sudo chown -R apache:apache "$APP_DIR"
