@@ -32,8 +32,6 @@ jobs:
           APP_DIR=/var/www/html
           REPO_URL="https://github.com/endrycofr/terraform_aws.git"
           BRANCH="main"
-          - name: Mark repo dir as safe for Git
-          git config --global --add safe.directory /var/www/html
 
           if [ ! -d "$APP_DIR/.git" ]; then
             echo "Repo tidak valid atau hilang, cloning baru..."
