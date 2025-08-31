@@ -977,3 +977,39 @@
    at GitHub.Runner.Listener.BrokerMessageListener.CreateSessionAsync(CancellationToken token)
 [2025-08-31 06:12:21Z INFO BrokerMessageListener] Retriable exception: Input/output error
 [2025-08-31 06:12:21Z INFO BrokerMessageListener] Sleeping for 30 seconds before retrying.
+[2025-08-31 06:12:51Z INFO BrokerMessageListener] Attempt to create session.
+[2025-08-31 06:12:51Z INFO BrokerMessageListener] Connecting to the Broker Server...
+[2025-08-31 06:12:51Z INFO ConfigurationStore] HasCredentials()
+[2025-08-31 06:12:51Z INFO ConfigurationStore] stored True
+[2025-08-31 06:12:51Z INFO CredentialManager] GetCredentialProvider
+[2025-08-31 06:12:51Z INFO CredentialManager] Creating type OAuth
+[2025-08-31 06:12:51Z INFO CredentialManager] Creating credential type: OAuth
+[2025-08-31 06:12:51Z INFO RSAFileKeyManager] Loading RSA key parameters from file /home/ec2-user/environment/aws_automation/actions-runner/.credentials_rsaparams
+[2025-08-31 06:12:51Z INFO BrokerMessageListener] VssConnection created
+[2025-08-31 06:12:51Z INFO BrokerMessageListener] Connecting to the Runner server...
+[2025-08-31 06:12:51Z INFO RunnerServer] EstablishVssConnection
+[2025-08-31 06:12:51Z INFO RunnerServer] Establish connection with 100 seconds timeout.
+[2025-08-31 06:12:51Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-08-31 06:12:51Z INFO RunnerServer] EstablishVssConnection
+[2025-08-31 06:12:51Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2025-08-31 06:12:51Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-08-31 06:12:51Z INFO RunnerServer] EstablishVssConnection
+[2025-08-31 06:12:51Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2025-08-31 06:12:51Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-08-31 06:12:52Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-08-31 06:12:52Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-08-31 06:12:52Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-08-31 06:12:52Z INFO BrokerMessageListener] VssConnection created
+[2025-08-31 06:12:52Z INFO Terminal] WRITE LINE: 
+[2025-08-31 06:12:52Z ERR  BrokerMessageListener] Catch exception during create session.
+[2025-08-31 06:12:52Z ERR  BrokerMessageListener] System.IO.IOException: Input/output error
+   at System.ConsolePal.Write(SafeFileHandle fd, ReadOnlySpan`1 buffer, Boolean mayChangeCursorPosition)
+   at System.IO.StreamWriter.Flush(Boolean flushStream, Boolean flushEncoder)
+   at System.IO.StreamWriter.WriteLine(String value)
+   at System.IO.TextWriter.SyncTextWriter.WriteLine(String value)
+   at System.Console.WriteLine(String value)
+   at GitHub.Runner.Common.Terminal.WriteLine(String line, Nullable`1 colorCode, Boolean skipTracing)
+   at GitHub.Runner.Common.Terminal.WriteLine()
+   at GitHub.Runner.Listener.BrokerMessageListener.CreateSessionAsync(CancellationToken token)
+[2025-08-31 06:12:52Z INFO BrokerMessageListener] Retriable exception: Input/output error
+[2025-08-31 06:12:52Z INFO BrokerMessageListener] Sleeping for 30 seconds before retrying.

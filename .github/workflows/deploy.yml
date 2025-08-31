@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout repository (for local reference)
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.MY_GH_TOKEN }} # Gunakan token lama dari Secrets
 
       - name: Backup current version
         run: |
@@ -30,8 +32,8 @@ jobs:
       - name: Update /var/www/html with git reset and pull --rebase
         run: |
           APP_DIR=/var/www/html
-          REPO_URL="https://github.com/endrycofr/terraform_aws.git"
           BRANCH="main"
+          REPO_URL="https://${{ secrets.MY_GH_TOKEN }}@github.com/endrycofr/terraform_aws.git"
 
           # Ambil kepemilikan sementara agar git bisa tulis
           sudo chown -R $USER:$USER "$APP_DIR"
@@ -74,4 +76,3 @@ jobs:
           else
             echo "Tidak ada backup tersedia."
           fi
-
