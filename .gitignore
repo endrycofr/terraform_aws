@@ -13,3 +13,5 @@ actions-runner/externals/node20*
 
 # Ignore terraform provider binaries
 terraform-provider-*
+.ssh/
+.c9/

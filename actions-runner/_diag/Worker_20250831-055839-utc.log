@@ -1,0 +1,3698 @@
+[2025-08-31 05:58:39Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known config file 'Credentials': '/home/ec2-user/environment/aws_automation/actions-runner/.credentials'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known config file 'Runner': '/home/ec2-user/environment/aws_automation/actions-runner/.runner'
+[2025-08-31 05:58:39Z INFO Worker] Version: 2.328.0
+[2025-08-31 05:58:39Z INFO Worker] Commit: 6f9a9110adce65f44ca6f7c0ae142b9cc6af937b
+[2025-08-31 05:58:39Z INFO Worker] Culture: 
+[2025-08-31 05:58:39Z INFO Worker] UI Culture: 
+[2025-08-31 05:58:39Z INFO Worker] Waiting to receive the job message from the channel.
+[2025-08-31 05:58:39Z INFO ProcessChannel] Receiving message of length 21946, with hash 'eeeac3e6c8a6ac5be496f12787f9e2118f222fba1beb8ced447c563991f937ac'
+[2025-08-31 05:58:39Z INFO Worker] Message received.
+[2025-08-31 05:58:39Z INFO Worker] Job message:
+ {
+  "fileTable": [
+    ".github/workflows/deploy.yml"
+  ],
+  "mask": [
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    }
+  ],
+  "steps": [
+    {
+      "type": "action",
+      "reference": {
+        "type": "repository",
+        "name": "actions/checkout",
+        "ref": "v4",
+        "repositoryType": "GitHub"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 12,
+        "col": 15,
+        "lit": "Checkout repository (for local reference)"
+      },
+      "contextName": "__actions_checkout",
+      "condition": "success()",
+      "id": "47795675-0473-4900-b844-7e1a435e8555",
+      "name": "__actions_checkout"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 15,
+        "col": 15,
+        "lit": "Backup current version"
+      },
+      "contextName": "__run",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 16,
+              "col": 14,
+              "lit": "APP_DIR=/var/www/html\nBACKUP_DIR=\"/var/www/html_backup_$(date +'%Y%m%d_%H%M%S')\"\necho \"Membuat backup ke $BACKUP_DIR...\"\nif [ -d \"$APP_DIR\" ]; then\n  sudo cp -r \"$APP_DIR\" \"$BACKUP_DIR\"\nfi\n"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "cbb1ac7f-a98c-443a-a547-e65336def242",
+      "name": "__run"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 24,
+        "col": 15,
+        "lit": "Allow Git safe.directory"
+      },
+      "contextName": "__run_2",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 25,
+              "col": 14,
+              "lit": "APP_DIR=/var/www/html\ngit config --global --add safe.directory \"$APP_DIR\"\nsudo git config --system --add safe.directory \"$APP_DIR\"\n"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "72568bfe-9db8-4f3f-8144-7a71ee77157d",
+      "name": "__run_2"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 30,
+        "col": 15,
+        "lit": "Update /var/www/html with git reset and pull --rebase"
+      },
+      "contextName": "__run_3",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 31,
+              "col": 14,
+              "lit": "APP_DIR=/var/www/html\nREPO_URL=\"https://github.com/endrycofr/terraform_aws.git\"\nBRANCH=\"main\"\n\n# Ambil kepemilikan sementara agar git bisa tulis\nsudo chown -R $USER:$USER \"$APP_DIR\"\n\nif [ ! -d \"$APP_DIR/.git\" ]; then\n  echo \"Repo tidak valid atau hilang, cloning baru...\"\n  sudo rm -rf \"$APP_DIR\"\n  mkdir -p \"$APP_DIR\"\n  git clone --branch \"$BRANCH\" \"$REPO_URL\" \"$APP_DIR\"\nelse\n  echo \"Repo valid, membersihkan perubahan lokal...\"\n  cd \"$APP_DIR\"\n  git reset --hard\n  git clean -fd\n  git fetch origin \"$BRANCH\"\n  git pull --rebase origin \"$BRANCH\"\nfi\n"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "e82831f1-db66-4771-800e-0d763b0a1746",
+      "name": "__run_3"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 53,
+        "col": 15,
+        "lit": "Set permissions back to Apache"
+      },
+      "contextName": "__run_4",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 54,
+              "col": 14,
+              "lit": "APP_DIR=/var/www/html\nsudo chown -R apache:apache \"$APP_DIR\"\nsudo chmod -R 755 \"$APP_DIR\"\n"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "a9e8ff18-b8e1-47ef-8f21-ef19846dfcff",
+      "name": "__run_4"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 59,
+        "col": 15,
+        "lit": "Restart Apache"
+      },
+      "contextName": "__run_5",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 60,
+              "col": 14,
+              "lit": "sudo systemctl restart httpd"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "c924047a-c6d2-4ea3-bde4-c0d7d84f6346",
+      "name": "__run_5"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 62,
+        "col": 15,
+        "lit": "Rollback on failure"
+      },
+      "contextName": "__run_6",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 64,
+              "col": 14,
+              "lit": "echo \"Deploy gagal! Melakukan rollback...\"\nLAST_BACKUP=$(ls -td /var/www/html_backup_* 2>/dev/null | head -n1)\nif [ -n \"$LAST_BACKUP\" ]; then\n  sudo rm -rf /var/www/html\n  sudo cp -r \"$LAST_BACKUP\" /var/www/html\n  sudo chown -R apache:apache /var/www/html\n  sudo chmod -R 755 /var/www/html\n  sudo systemctl restart httpd\n  echo \"Rollback berhasil dari $LAST_BACKUP\"\nelse\n  echo \"Tidak ada backup tersedia.\"\nfi\n"
+            }
+          }
+        ]
+      },
+      "condition": "failure()",
+      "id": "23132ed6-b3ce-4e64-bca7-1ce79074b1d9",
+      "name": "__run_6"
+    }
+  ],
+  "variables": {
+    "Actions.EnableHttpRedirects": {
+      "value": "true"
+    },
+    "DistributedTask.AddWarningToNode12Action": {
+      "value": "true"
+    },
+    "DistributedTask.AddWarningToNode16Action": {
+      "value": "true"
+    },
+    "DistributedTask.AllowRunnerContainerHooks": {
+      "value": "true"
+    },
+    "DistributedTask.DeprecateStepOutputCommands": {
+      "value": "true"
+    },
+    "DistributedTask.DetailUntarFailure": {
+      "value": "true"
+    },
+    "DistributedTask.EnableCompositeActions": {
+      "value": "true"
+    },
+    "DistributedTask.EnableJobServerQueueTelemetry": {
+      "value": "true"
+    },
+    "DistributedTask.EnhancedAnnotations": {
+      "value": "true"
+    },
+    "DistributedTask.ForceGithubJavascriptActionsToNode16": {
+      "value": "true"
+    },
+    "DistributedTask.ForceGithubJavascriptActionsToNode20": {
+      "value": "true"
+    },
+    "DistributedTask.LogTemplateErrorsAsDebugMessages": {
+      "value": "true"
+    },
+    "DistributedTask.MarkJobAsFailedOnWorkerCrash": {
+      "value": "true"
+    },
+    "DistributedTask.NewActionMetadata": {
+      "value": "true"
+    },
+    "DistributedTask.UploadStepSummary": {
+      "value": "true"
+    },
+    "DistributedTask.UseActionArchiveCache": {
+      "value": "true"
+    },
+    "DistributedTask.UseWhich2": {
+      "value": "true"
+    },
+    "RunService.FixEmbeddedIssues": {
+      "value": "true"
+    },
+    "actions_add_check_run_id_to_job_context": {
+      "value": "false"
+    },
+    "actions_display_helpful_actions_download_errors": {
+      "value": "true"
+    },
+    "actions_skip_retry_complete_job_upon_known_errors": {
+      "value": "true"
+    },
+    "actions_uses_cache_service_v2": {
+      "value": "true"
+    },
+    "github_token": {
+      "value": "***",
+      "isSecret": true
+    },
+    "system.from_run_service": {
+      "value": "true"
+    },
+    "system.github.job": {
+      "value": "deploy"
+    },
+    "system.github.launch_endpoint": {
+      "value": "https://launch.actions.githubusercontent.com"
+    },
+    "system.github.results_endpoint": {
+      "value": "https://results-receiver.actions.githubusercontent.com/"
+    },
+    "system.github.results_upload_with_sdk": {
+      "value": "true"
+    },
+    "system.github.token": {
+      "value": "***",
+      "isSecret": true
+    },
+    "system.github.token.permissions": {
+      "value": "{\"Contents\":\"read\",\"Metadata\":\"read\",\"Packages\":\"read\"}"
+    },
+    "system.orchestrationId": {
+      "value": "40934935-9e0b-4cf0-936c-40e45c4579d9.deploy.__default"
+    },
+    "system.phaseDisplayName": {
+      "value": "deploy"
+    },
+    "system.runner.lowdiskspacethreshold": {
+      "value": "100"
+    },
+    "system.runnerEnvironment": {
+      "value": "self-hosted"
+    },
+    "system.runnerGroupName": {
+      "value": "Default"
+    }
+  },
+  "messageType": "RunnerJobRequest",
+  "plan": {
+    "scopeIdentifier": "00000000-0000-0000-0000-000000000000",
+    "planType": "actions",
+    "version": 0,
+    "planId": "40934935-9e0b-4cf0-936c-40e45c4579d9",
+    "planGroup": null,
+    "artifactUri": null,
+    "artifactLocation": null,
+    "definition": null,
+    "owner": null
+  },
+  "timeline": {
+    "id": "40934935-9e0b-4cf0-936c-40e45c4579d9",
+    "changeId": 0,
+    "location": null
+  },
+  "jobId": "4304cc68-9d78-57ac-af2c-e25a62db39b2",
+  "jobDisplayName": "deploy",
+  "jobName": "__default",
+  "requestId": 0,
+  "lockedUntil": "0001-01-01T00:00:00",
+  "resources": {
+    "endpoints": [
+      {
+        "data": {
+          "ServerId": "",
+          "ServerName": "",
+          "CacheServerUrl": "https://artifactcache.actions.githubusercontent.com/oKbhxqVn1LnGpIG6JbP15b5DbbyytFn2WrjBvVjt0TpcCtU7IN/",
+          "FeedStreamUrl": "wss://results-receiver.actions.githubusercontent.com/_ws/ingest.sock",
+          "ResultsServiceUrl": "https://results-receiver.actions.githubusercontent.com/",
+          "PipelinesServiceUrl": "https://pipelinesghubeus15.actions.githubusercontent.com/oKbhxqVn1LnGpIG6JbP15b5DbbyytFn2WrjBvVjt0TpcCtU7IN/",
+          "GenerateIdTokenUrl": ""
+        },
+        "name": "SystemVssConnection",
+        "url": "https://run-actions-1-azure-eastus.actions.githubusercontent.com/24/",
+        "authorization": {
+          "parameters": {
+            "AccessToken": "***"
+          },
+          "scheme": "OAuth"
+        },
+        "isShared": false,
+        "isReady": true
+      }
+    ]
+  },
+  "contextData": {
+    "github": {
+      "t": 2,
+      "d": [
+        {
+          "k": "ref",
+          "v": "refs/heads/main"
+        },
+        {
+          "k": "sha",
+          "v": "89e3207a561a6af4c898228f1d96bc2a3049a818"
+        },
+        {
+          "k": "repository",
+          "v": "endrycofr/terraform_aws"
+        },
+        {
+          "k": "repository_owner",
+          "v": "endrycofr"
+        },
+        {
+          "k": "repository_owner_id",
+          "v": "88662707"
+        },
+        {
+          "k": "repositoryUrl",
+          "v": "git://github.com/endrycofr/terraform_aws.git"
+        },
+        {
+          "k": "run_id",
+          "v": "17353267068"
+        },
+        {
+          "k": "run_number",
+          "v": "19"
+        },
+        {
+          "k": "retention_days",
+          "v": "90"
+        },
+        {
+          "k": "run_attempt",
+          "v": "1"
+        },
+        {
+          "k": "artifact_cache_size_limit",
+          "v": "10"
+        },
+        {
+          "k": "repository_visibility",
+          "v": "public"
+        },
+        {
+          "k": "actor_id",
+          "v": "88662707"
+        },
+        {
+          "k": "actor",
+          "v": "endrycofr"
+        },
+        {
+          "k": "workflow",
+          "v": "Safe Deploy with Rebase to EC2 via Self-hosted Runner"
+        },
+        {
+          "k": "head_ref",
+          "v": ""
+        },
+        {
+          "k": "base_ref",
+          "v": ""
+        },
+        {
+          "k": "event_name",
+          "v": "push"
+        },
+        {
+          "k": "server_url",
+          "v": "https://github.com"
+        },
+        {
+          "k": "api_url",
+          "v": "https://api.github.com"
+        },
+        {
+          "k": "graphql_url",
+          "v": "https://api.github.com/graphql"
+        },
+        {
+          "k": "ref_name",
+          "v": "main"
+        },
+        {
+          "k": "ref_protected",
+          "v": false
+        },
+        {
+          "k": "ref_type",
+          "v": "branch"
+        },
+        {
+          "k": "secret_source",
+          "v": "Actions"
+        },
+        {
+          "k": "event",
+          "v": {
+            "t": 2,
+            "d": [
+              {
+                "k": "after",
+                "v": "89e3207a561a6af4c898228f1d96bc2a3049a818"
+              },
+              {
+                "k": "base_ref",
+                "v": null
+              },
+              {
+                "k": "before",
+                "v": "fbf5b14be429b9aa43edabacc2fe58e3615852ee"
+              },
+              {
+                "k": "commits",
+                "v": {
+                  "t": 1,
+                  "a": [
+                    {
+                      "t": 2,
+                      "d": [
+                        {
+                          "k": "author",
+                          "v": {
+                            "t": 2,
+                            "d": [
+                              {
+                                "k": "email",
+                                "v": "ec2-user@ip-172-31-22-74.us-west-2.compute.internal"
+                              },
+                              {
+                                "k": "name",
+                                "v": "endrycofr"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "k": "committer",
+                          "v": {
+                            "t": 2,
+                            "d": [
+                              {
+                                "k": "email",
+                                "v": "ec2-user@ip-172-31-22-74.us-west-2.compute.internal"
+                              },
+                              {
+                                "k": "name",
+                                "v": "endrycofr"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "k": "distinct",
+                          "v": true
+                        },
+                        {
+                          "k": "id",
+                          "v": "89e3207a561a6af4c898228f1d96bc2a3049a818"
+                        },
+                        {
+                          "k": "message",
+                          "v": "menambahkan code"
+                        },
+                        {
+                          "k": "timestamp",
+                          "v": "2025-08-31T05:58:05Z"
+                        },
+                        {
+                          "k": "tree_id",
+                          "v": "da2cc3e55f4b98bec85d11826c4b635bf48ce2f5"
+                        },
+                        {
+                          "k": "url",
+                          "v": "https://github.com/endrycofr/terraform_aws/commit/89e3207a561a6af4c898228f1d96bc2a3049a818"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "compare",
+                "v": "https://github.com/endrycofr/terraform_aws/compare/fbf5b14be429...89e3207a561a"
+              },
+              {
+                "k": "created",
+                "v": false
+              },
+              {
+                "k": "deleted",
+                "v": false
+              },
+              {
+                "k": "forced",
+                "v": false
+              },
+              {
+                "k": "head_commit",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "author",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "email",
+                            "v": "ec2-user@ip-172-31-22-74.us-west-2.compute.internal"
+                          },
+                          {
+                            "k": "name",
+                            "v": "endrycofr"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "committer",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "email",
+                            "v": "ec2-user@ip-172-31-22-74.us-west-2.compute.internal"
+                          },
+                          {
+                            "k": "name",
+                            "v": "endrycofr"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "distinct",
+                      "v": true
+                    },
+                    {
+                      "k": "id",
+                      "v": "89e3207a561a6af4c898228f1d96bc2a3049a818"
+                    },
+                    {
+                      "k": "message",
+                      "v": "menambahkan code"
+                    },
+                    {
+                      "k": "timestamp",
+                      "v": "2025-08-31T05:58:05Z"
+                    },
+                    {
+                      "k": "tree_id",
+                      "v": "da2cc3e55f4b98bec85d11826c4b635bf48ce2f5"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://github.com/endrycofr/terraform_aws/commit/89e3207a561a6af4c898228f1d96bc2a3049a818"
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "pusher",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "email",
+                      "v": "88662707+endrycofr@users.noreply.github.com"
+                    },
+                    {
+                      "k": "name",
+                      "v": "endrycofr"
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "ref",
+                "v": "refs/heads/main"
+              },
+              {
+                "k": "repository",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "allow_forking",
+                      "v": true
+                    },
+                    {
+                      "k": "archive_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/{archive_format}{/ref}"
+                    },
+                    {
+                      "k": "archived",
+                      "v": false
+                    },
+                    {
+                      "k": "assignees_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/assignees{/user}"
+                    },
+                    {
+                      "k": "blobs_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/git/blobs{/sha}"
+                    },
+                    {
+                      "k": "branches_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/branches{/branch}"
+                    },
+                    {
+                      "k": "clone_url",
+                      "v": "https://github.com/endrycofr/terraform_aws.git"
+                    },
+                    {
+                      "k": "collaborators_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/collaborators{/collaborator}"
+                    },
+                    {
+                      "k": "comments_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/comments{/number}"
+                    },
+                    {
+                      "k": "commits_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/commits{/sha}"
+                    },
+                    {
+                      "k": "compare_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/compare/{base}...{head}"
+                    },
+                    {
+                      "k": "contents_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/contents/{+path}"
+                    },
+                    {
+                      "k": "contributors_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/contributors"
+                    },
+                    {
+                      "k": "created_at",
+                      "v": 1756435813.0
+                    },
+                    {
+                      "k": "default_branch",
+                      "v": "main"
+                    },
+                    {
+                      "k": "deployments_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/deployments"
+                    },
+                    {
+                      "k": "description",
+                      "v": null
+                    },
+                    {
+                      "k": "disabled",
+                      "v": false
+                    },
+                    {
+                      "k": "downloads_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/downloads"
+                    },
+                    {
+                      "k": "events_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/events"
+                    },
+                    {
+                      "k": "fork",
+                      "v": false
+                    },
+                    {
+                      "k": "forks",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "forks_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "forks_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/forks"
+                    },
+                    {
+                      "k": "full_name",
+                      "v": "endrycofr/terraform_aws"
+                    },
+                    {
+                      "k": "git_commits_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/git/commits{/sha}"
+                    },
+                    {
+                      "k": "git_refs_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/git/refs{/sha}"
+                    },
+                    {
+                      "k": "git_tags_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/git/tags{/sha}"
+                    },
+                    {
+                      "k": "git_url",
+                      "v": "git://github.com/endrycofr/terraform_aws.git"
+                    },
+                    {
+                      "k": "has_discussions",
+                      "v": false
+                    },
+                    {
+                      "k": "has_downloads",
+                      "v": true
+                    },
+                    {
+                      "k": "has_issues",
+                      "v": true
+                    },
+                    {
+                      "k": "has_pages",
+                      "v": false
+                    },
+                    {
+                      "k": "has_projects",
+                      "v": true
+                    },
+                    {
+                      "k": "has_wiki",
+                      "v": true
+                    },
+                    {
+                      "k": "homepage",
+                      "v": null
+                    },
+                    {
+                      "k": "hooks_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/hooks"
+                    },
+                    {
+                      "k": "html_url",
+                      "v": "https://github.com/endrycofr/terraform_aws"
+                    },
+                    {
+                      "k": "id",
+                      "v": 1046656850.0
+                    },
+                    {
+                      "k": "is_template",
+                      "v": false
+                    },
+                    {
+                      "k": "issue_comment_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/issues/comments{/number}"
+                    },
+                    {
+                      "k": "issue_events_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/issues/events{/number}"
+                    },
+                    {
+                      "k": "issues_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/issues{/number}"
+                    },
+                    {
+                      "k": "keys_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/keys{/key_id}"
+                    },
+                    {
+                      "k": "labels_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/labels{/name}"
+                    },
+                    {
+                      "k": "language",
+                      "v": "JavaScript"
+                    },
+                    {
+                      "k": "languages_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/languages"
+                    },
+                    {
+                      "k": "license",
+                      "v": null
+                    },
+                    {
+                      "k": "master_branch",
+                      "v": "main"
+                    },
+                    {
+                      "k": "merges_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/merges"
+                    },
+                    {
+                      "k": "milestones_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/milestones{/number}"
+                    },
+                    {
+                      "k": "mirror_url",
+                      "v": null
+                    },
+                    {
+                      "k": "name",
+                      "v": "terraform_aws"
+                    },
+                    {
+                      "k": "node_id",
+                      "v": "R_kgDOPmK3Ug"
+                    },
+                    {
+                      "k": "notifications_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/notifications{?since,all,participating}"
+                    },
+                    {
+                      "k": "open_issues",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "open_issues_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "owner",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "avatar_url",
+                            "v": "https://avatars.githubusercontent.com/u/88662707?v=4"
+                          },
+                          {
+                            "k": "email",
+                            "v": "88662707+endrycofr@users.noreply.github.com"
+                          },
+                          {
+                            "k": "events_url",
+                            "v": "https://api.github.com/users/endrycofr/events{/privacy}"
+                          },
+                          {
+                            "k": "followers_url",
+                            "v": "https://api.github.com/users/endrycofr/followers"
+                          },
+                          {
+                            "k": "following_url",
+                            "v": "https://api.github.com/users/endrycofr/following{/other_user}"
+                          },
+                          {
+                            "k": "gists_url",
+                            "v": "https://api.github.com/users/endrycofr/gists{/gist_id}"
+                          },
+                          {
+                            "k": "gravatar_id",
+                            "v": ""
+                          },
+                          {
+                            "k": "html_url",
+                            "v": "https://github.com/endrycofr"
+                          },
+                          {
+                            "k": "id",
+                            "v": 88662707.0
+                          },
+                          {
+                            "k": "login",
+                            "v": "endrycofr"
+                          },
+                          {
+                            "k": "name",
+                            "v": "endrycofr"
+                          },
+                          {
+                            "k": "node_id",
+                            "v": "MDQ6VXNlcjg4NjYyNzA3"
+                          },
+                          {
+                            "k": "organizations_url",
+                            "v": "https://api.github.com/users/endrycofr/orgs"
+                          },
+                          {
+                            "k": "received_events_url",
+                            "v": "https://api.github.com/users/endrycofr/received_events"
+                          },
+                          {
+                            "k": "repos_url",
+                            "v": "https://api.github.com/users/endrycofr/repos"
+                          },
+                          {
+                            "k": "site_admin",
+                            "v": false
+                          },
+                          {
+                            "k": "starred_url",
+                            "v": "https://api.github.com/users/endrycofr/starred{/owner}{/repo}"
+                          },
+                          {
+                            "k": "subscriptions_url",
+                            "v": "https://api.github.com/users/endrycofr/subscriptions"
+                          },
+                          {
+                            "k": "type",
+                            "v": "User"
+                          },
+                          {
+                            "k": "url",
+                            "v": "https://api.github.com/users/endrycofr"
+                          },
+                          {
+                            "k": "user_view_type",
+                            "v": "public"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "private",
+                      "v": false
+                    },
+                    {
+                      "k": "pulls_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/pulls{/number}"
+                    },
+                    {
+                      "k": "pushed_at",
+                      "v": 1756619915.0
+                    },
+                    {
+                      "k": "releases_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/releases{/id}"
+                    },
+                    {
+                      "k": "size",
+                      "v": 92482.0
+                    },
+                    {
+                      "k": "ssh_url",
+                      "v": "git@github.com:endrycofr/terraform_aws.git"
+                    },
+                    {
+                      "k": "stargazers",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "stargazers_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "stargazers_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/stargazers"
+                    },
+                    {
+                      "k": "statuses_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/statuses/{sha}"
+                    },
+                    {
+                      "k": "subscribers_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/subscribers"
+                    },
+                    {
+                      "k": "subscription_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/subscription"
+                    },
+                    {
+                      "k": "svn_url",
+                      "v": "https://github.com/endrycofr/terraform_aws"
+                    },
+                    {
+                      "k": "tags_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/tags"
+                    },
+                    {
+                      "k": "teams_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/teams"
+                    },
+                    {
+                      "k": "topics",
+                      "v": {
+                        "t": 1
+                      }
+                    },
+                    {
+                      "k": "trees_url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws/git/trees{/sha}"
+                    },
+                    {
+                      "k": "updated_at",
+                      "v": "2025-08-31T05:57:04Z"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://api.github.com/repos/endrycofr/terraform_aws"
+                    },
+                    {
+                      "k": "visibility",
+                      "v": "public"
+                    },
+                    {
+                      "k": "watchers",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "watchers_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "web_commit_signoff_required",
+                      "v": false
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "sender",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "avatar_url",
+                      "v": "https://avatars.githubusercontent.com/u/88662707?v=4"
+                    },
+                    {
+                      "k": "events_url",
+                      "v": "https://api.github.com/users/endrycofr/events{/privacy}"
+                    },
+                    {
+                      "k": "followers_url",
+                      "v": "https://api.github.com/users/endrycofr/followers"
+                    },
+                    {
+                      "k": "following_url",
+                      "v": "https://api.github.com/users/endrycofr/following{/other_user}"
+                    },
+                    {
+                      "k": "gists_url",
+                      "v": "https://api.github.com/users/endrycofr/gists{/gist_id}"
+                    },
+                    {
+                      "k": "gravatar_id",
+                      "v": ""
+                    },
+                    {
+                      "k": "html_url",
+                      "v": "https://github.com/endrycofr"
+                    },
+                    {
+                      "k": "id",
+                      "v": 88662707.0
+                    },
+                    {
+                      "k": "login",
+                      "v": "endrycofr"
+                    },
+                    {
+                      "k": "node_id",
+                      "v": "MDQ6VXNlcjg4NjYyNzA3"
+                    },
+                    {
+                      "k": "organizations_url",
+                      "v": "https://api.github.com/users/endrycofr/orgs"
+                    },
+                    {
+                      "k": "received_events_url",
+                      "v": "https://api.github.com/users/endrycofr/received_events"
+                    },
+                    {
+                      "k": "repos_url",
+                      "v": "https://api.github.com/users/endrycofr/repos"
+                    },
+                    {
+                      "k": "site_admin",
+                      "v": false
+                    },
+                    {
+                      "k": "starred_url",
+                      "v": "https://api.github.com/users/endrycofr/starred{/owner}{/repo}"
+                    },
+                    {
+                      "k": "subscriptions_url",
+                      "v": "https://api.github.com/users/endrycofr/subscriptions"
+                    },
+                    {
+                      "k": "type",
+                      "v": "User"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://api.github.com/users/endrycofr"
+                    },
+                    {
+                      "k": "user_view_type",
+                      "v": "public"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "k": "workflow_ref",
+          "v": "endrycofr/terraform_aws/.github/workflows/deploy.yml@refs/heads/main"
+        },
+        {
+          "k": "workflow_sha",
+          "v": "89e3207a561a6af4c898228f1d96bc2a3049a818"
+        },
+        {
+          "k": "repository_id",
+          "v": "1046656850"
+        },
+        {
+          "k": "triggering_actor",
+          "v": "endrycofr"
+        }
+      ]
+    },
+    "inputs": {
+      "t": 2
+    },
+    "matrix": null,
+    "needs": {
+      "t": 2
+    },
+    "strategy": {
+      "t": 2,
+      "d": [
+        {
+          "k": "fail-fast",
+          "v": true
+        },
+        {
+          "k": "job-index",
+          "v": 0.0
+        },
+        {
+          "k": "job-total",
+          "v": 1.0
+        },
+        {
+          "k": "max-parallel",
+          "v": 1.0
+        }
+      ]
+    },
+    "vars": {
+      "t": 2
+    }
+  },
+  "billingOwnerId": "U_kgDOBUjisw"
+}
+[2025-08-31 05:58:39Z INFO JobRunner] Job ID 4304cc68-9d78-57ac-af2c-e25a62db39b2
+[2025-08-31 05:58:39Z INFO ConfigurationStore] currentAssemblyLocation: /home/ec2-user/environment/aws_automation/actions-runner/bin/Runner.Worker.dll
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO ConfigurationStore] binPath: /home/ec2-user/environment/aws_automation/actions-runner/bin
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO ConfigurationStore] RootFolder: /home/ec2-user/environment/aws_automation/actions-runner
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known config file 'Runner': '/home/ec2-user/environment/aws_automation/actions-runner/.runner'
+[2025-08-31 05:58:39Z INFO ConfigurationStore] ConfigFilePath: /home/ec2-user/environment/aws_automation/actions-runner/.runner
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known config file 'MigratedRunner': '/home/ec2-user/environment/aws_automation/actions-runner/.runner_migrated'
+[2025-08-31 05:58:39Z INFO ConfigurationStore] MigratedConfigFilePath: /home/ec2-user/environment/aws_automation/actions-runner/.runner_migrated
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known config file 'Credentials': '/home/ec2-user/environment/aws_automation/actions-runner/.credentials'
+[2025-08-31 05:58:39Z INFO ConfigurationStore] CredFilePath: /home/ec2-user/environment/aws_automation/actions-runner/.credentials
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known config file 'MigratedCredentials': '/home/ec2-user/environment/aws_automation/actions-runner/.credentials_migrated'
+[2025-08-31 05:58:39Z INFO ConfigurationStore] MigratedCredFilePath: /home/ec2-user/environment/aws_automation/actions-runner/.credentials_migrated
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known config file 'Service': '/home/ec2-user/environment/aws_automation/actions-runner/.service'
+[2025-08-31 05:58:39Z INFO ConfigurationStore] ServiceConfigFilePath: /home/ec2-user/environment/aws_automation/actions-runner/.service
+[2025-08-31 05:58:39Z INFO ConfigurationStore] Read setting file: 392 chars
+[2025-08-31 05:58:39Z INFO JobRunner] Initializing launch client
+[2025-08-31 05:58:39Z INFO JobServerQueue] Initializing results client
+[2025-08-31 05:58:39Z INFO ResultServer] Creating websocket client ...wss://results-receiver.actions.githubusercontent.com/_ws/ingest.sock
+[2025-08-31 05:58:39Z INFO ResultServer] Attempting to start websocket client with delay 00:00:00.
+[2025-08-31 05:58:39Z INFO JobServerQueue] Start process web console line queue.
+[2025-08-31 05:58:39Z INFO JobServerQueue] Start process file upload queue.
+[2025-08-31 05:58:39Z INFO JobServerQueue] Start results file upload queue.
+[2025-08-31 05:58:39Z INFO JobServerQueue] Starting results-based upload queue...
+[2025-08-31 05:58:39Z INFO JobServerQueue] Start process timeline update queue.
+[2025-08-31 05:58:39Z INFO ExecutionContext] Initializing Job context
+[2025-08-31 05:58:39Z INFO ExecutionContext] Initialize GitHub context
+[2025-08-31 05:58:39Z INFO ExecutionContext] Initialize Env context
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:39Z INFO JobRunner] Starting the job execution context.
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:39Z INFO JobRunner] Validating directory permissions for: '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Tools': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_tool'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:39Z INFO JobRunner] Getting job extension.
+[2025-08-31 05:58:39Z INFO JobRunner] Initialize job. Getting all job steps.
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known config file 'Credentials': '/home/ec2-user/environment/aws_automation/actions-runner/.credentials'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known config file 'SetupInfo': '/home/ec2-user/environment/aws_automation/actions-runner/.setup_info'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:39Z INFO PipelineDirectoryManager] Loading tracking config if exists: /home/ec2-user/environment/aws_automation/actions-runner/_work/_PipelineMapping/endrycofr/terraform_aws/PipelineFolder.json
+[2025-08-31 05:58:39Z INFO PipelineDirectoryManager] Updating job run properties.
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:39Z INFO JobExtension] Downloading actions
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:39Z INFO HostContext] Well known directory 'Actions': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions'
+[2025-08-31 05:58:39Z INFO Worker] Listening for cancel message from the channel.
+[2025-08-31 05:58:39Z INFO Worker] Waiting for the job to complete or for a cancel message from the channel.
+[2025-08-31 05:58:40Z INFO ResultServer] Successfully started websocket client.
+[2025-08-31 05:58:40Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b4db8b9e-63b4-4ee4-a288-9c249512d5ec', success rate: 1/1.
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Actions': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Actions': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions'
+[2025-08-31 05:58:40Z INFO ActionManager] Save archive 'https://api.github.com/repos/actions/checkout/tarball/08eba0b27e820071cde6df949e0beb9ba4906955' into /home/ec2-user/environment/aws_automation/actions-runner/_work/_actions/_temp_5275de50-e510-469a-b901-45d05c89a34d/5b34ebcd-bc1f-4276-b454-53c2661a4ca4.tar.gz.
+[2025-08-31 05:58:40Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b4db8b9e-63b4-4ee4-a288-9c249512d5ec', success rate: 1/1.
+[2025-08-31 05:58:40Z INFO JobServerQueue] Job timeline record has been updated for the first time.
+[2025-08-31 05:58:40Z INFO ActionManager] Request URL: https://api.github.com/repos/actions/checkout/tarball/08eba0b27e820071cde6df949e0beb9ba4906955 X-GitHub-Request-Id: E78A:10E1:3AF352:505A8C:68B3E490 Http Status: OK
+[2025-08-31 05:58:40Z INFO ActionManager] Which2: 'tar'
+[2025-08-31 05:58:40Z INFO ActionManager] Location: '/usr/bin/tar'
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper] Starting process:
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper]   File name: '/usr/bin/tar'
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper]   Arguments: '-xzf "/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions/_temp_5275de50-e510-469a-b901-45d05c89a34d/5b34ebcd-bc1f-4276-b454-53c2661a4ca4.tar.gz"'
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper]   Working directory: '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions/_temp_5275de50-e510-469a-b901-45d05c89a34d/_staging'
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper] Updated oom_score_adj to 500 for PID: 9907.
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper] Process started with process id 9907, waiting for process exit.
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:40Z INFO ProcessInvokerWrapper] Finished process 9907 with exit code 0, and elapsed time 00:00:00.0297967.
+[2025-08-31 05:58:40Z INFO ActionManager] Finished getting action repository.
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Actions': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions'
+[2025-08-31 05:58:40Z INFO ActionManifestManager] Load schema file with definitions: [
+  "null",
+  "boolean",
+  "number",
+  "string",
+  "sequence",
+  "mapping",
+  "any",
+  "action-root",
+  "inputs",
+  "input",
+  "outputs",
+  "output-definition",
+  "runs",
+  "container-runs",
+  "container-runs-args",
+  "container-runs-env",
+  "node-runs",
+  "plugin-runs",
+  "composite-runs",
+  "composite-steps",
+  "composite-step",
+  "run-step",
+  "uses-step",
+  "container-runs-context",
+  "output-value",
+  "input-default-context",
+  "non-empty-string",
+  "string-steps-context",
+  "boolean-steps-context",
+  "step-env",
+  "step-if",
+  "step-with"
+]
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Actions': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions'
+[2025-08-31 05:58:40Z INFO ActionManifestManager] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2025-08-31 05:58:40Z INFO ActionManager] Action node.js file: dist/index.js, no more preparation.
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Actions': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions'
+[2025-08-31 05:58:40Z INFO ActionManager] Load action that reference repository from '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions/actions/checkout/v4'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Actions': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions'
+[2025-08-31 05:58:40Z INFO ActionManifestManager] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2025-08-31 05:58:40Z INFO ActionManager] Action pre node.js file: N/A.
+[2025-08-31 05:58:40Z INFO ActionManager] Action node.js file: dist/index.js.
+[2025-08-31 05:58:40Z INFO ActionManager] Action post node.js file: dist/index.js.
+[2025-08-31 05:58:40Z INFO JobExtension] Adding .
+[2025-08-31 05:58:40Z INFO JobExtension] Adding .
+[2025-08-31 05:58:40Z INFO JobExtension] Adding .
+[2025-08-31 05:58:40Z INFO JobExtension] Adding .
+[2025-08-31 05:58:40Z INFO JobExtension] Adding .
+[2025-08-31 05:58:40Z INFO JobExtension] Adding .
+[2025-08-31 05:58:40Z INFO JobExtension] Adding .
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:40Z INFO JobExtension] Total accessible running process: 139.
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:40Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:40Z INFO JobExtension] Start checking service connectivity in background.
+[2025-08-31 05:58:40Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "setup_job",
+  "type": "runner",
+  "stage": "Pre",
+  "stepId": "b4db8b9e-63b4-4ee4-a288-9c249512d5ec",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 2,
+  "startTime": "2025-08-31T05:58:39.7451108Z",
+  "finishTime": "2025-08-31T05:58:40.9800688Z"
+}.
+[2025-08-31 05:58:40Z INFO JobRunner] Total job steps: 7.
+[2025-08-31 05:58:40Z INFO JobRunner] Run all job steps.
+[2025-08-31 05:58:41Z INFO StepsRunner] Processing step: DisplayName='Checkout repository (for local reference)'
+[2025-08-31 05:58:41Z INFO StepsRunner] Evaluating: success()
+[2025-08-31 05:58:41Z INFO StepsRunner] Result: true
+[2025-08-31 05:58:41Z INFO StepsRunner] Starting the step.
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Actions': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions'
+[2025-08-31 05:58:41Z INFO ActionManager] Load action that reference repository from '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions/actions/checkout/v4'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Actions': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions'
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2025-08-31 05:58:41Z INFO ActionManager] Action pre node.js file: N/A.
+[2025-08-31 05:58:41Z INFO ActionManager] Action node.js file: dist/index.js.
+[2025-08-31 05:58:41Z INFO ActionManager] Action post node.js file: dist/index.js.
+[2025-08-31 05:58:41Z INFO ExecutionContext] Reserve record order 9 to 16 for post job actions.
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:41Z INFO ExecutionContext] Write event payload to /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_github_workflow/event.json
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:41Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2025-08-31 05:58:41Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b4db8b9e-63b4-4ee4-a288-9c249512d5ec', success rate: 1/1.
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddPathFileCommand, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetEnvFileCommand, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.CreateStepSummaryCommand, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SaveStateFileCommand, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetOutputFileCommand, Runner.Worker
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'repository': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 6,
+  "col": 14,
+  "lit": "endrycofr/terraform_aws"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'ref': default value evaluate result: ""
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'token': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 24,
+  "col": 14,
+  "lit": "***"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'ssh-key': default value evaluate result: ""
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'ssh-known-hosts': default value evaluate result: ""
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'ssh-strict': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 47,
+  "col": 14,
+  "lit": "true"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'ssh-user': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 51,
+  "col": 14,
+  "lit": "git"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'persist-credentials': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 54,
+  "col": 14,
+  "lit": "true"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'path': default value evaluate result: ""
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'clean': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 59,
+  "col": 14,
+  "lit": "true"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'filter': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 64,
+  "col": 14,
+  "lit": ""
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'sparse-checkout': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 69,
+  "col": 14,
+  "lit": ""
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'sparse-checkout-cone-mode': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 73,
+  "col": 14,
+  "lit": "true"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'fetch-depth': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 76,
+  "col": 14,
+  "lit": "1"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'fetch-tags': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 79,
+  "col": 14,
+  "lit": "false"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'show-progress': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 82,
+  "col": 14,
+  "lit": "true"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'lfs': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 85,
+  "col": 14,
+  "lit": "false"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'submodules': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 94,
+  "col": 14,
+  "lit": "false"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'set-safe-directory': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 97,
+  "col": 14,
+  "lit": "true"
+}
+[2025-08-31 05:58:41Z INFO ActionManifestManager] Input 'github-server-url': default value evaluate result: ""
+[2025-08-31 05:58:41Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.InternalPluginSetRepoPathCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetEnvCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetOutputCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SaveStateCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddPathCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddMaskCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddMatcherCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.RemoveMatcherCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.WarningCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.ErrorCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.NoticeCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.DebugCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.GroupCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.EndGroupCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.EchoCommandExtension, Runner.Worker
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command set-env
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command set-output
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command save-state
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command add-path
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command warning
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command error
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command notice
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command debug
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command group
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2025-08-31 05:58:41Z INFO ActionCommandManager] Register action command extension for command echo
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:41Z INFO HostContext] Well known directory 'Externals': '/home/ec2-user/environment/aws_automation/actions-runner/externals'
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper] Starting process:
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper]   File name: '/home/ec2-user/environment/aws_automation/actions-runner/externals/node20/bin/node'
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper]   Arguments: '"/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions/actions/checkout/v4/dist/index.js"'
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper]   Working directory: '/home/ec2-user/environment/aws_automation/actions-runner/_work/terraform_aws/terraform_aws'
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper] Updated oom_score_adj to 500 for PID: 9910.
+[2025-08-31 05:58:41Z INFO ProcessInvokerWrapper] Process started with process id 9910, waiting for process exit.
+[2025-08-31 05:58:41Z INFO AddMaskCommandExtension] Add new secret mask with length of 76
+[2025-08-31 05:58:41Z INFO JobServerQueue] Try to append 1 batches web console lines for record '47795675-0473-4900-b844-7e1a435e8555', success rate: 1/1.
+[2025-08-31 05:58:41Z INFO JobServerQueue] Try to append 1 batches web console lines for record '47795675-0473-4900-b844-7e1a435e8555', success rate: 1/1.
+[2025-08-31 05:58:41Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2025-08-31 05:58:41Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-08-31 05:58:41Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, /home/ec2-user/environment/aws_automation/actions-runner/_diag/blocks/40934935-9e0b-4cf0-936c-40e45c4579d9_b4db8b9e-63b4-4ee4-a288-9c249512d5ec.1
+[2025-08-31 05:58:41Z INFO JobServerQueue] Try to append 1 batches web console lines for record '47795675-0473-4900-b844-7e1a435e8555', success rate: 1/1.
+[2025-08-31 05:58:42Z INFO JobServerQueue] Try to append 1 batches web console lines for record '47795675-0473-4900-b844-7e1a435e8555', success rate: 1/1.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] Finished process 9910 with exit code 0, and elapsed time 00:00:00.9724890.
+[2025-08-31 05:58:42Z INFO CreateStepSummaryCommand] Step Summary file (/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_runner_file_commands/step_summary_904514c6-3072-4beb-be5c-ebd7ad493a8f) is empty; skipping attachment upload
+[2025-08-31 05:58:42Z INFO StepsRunner] Step result: 
+[2025-08-31 05:58:42Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "actions/checkout",
+  "ref": "v4",
+  "type": "node20",
+  "stage": "Main",
+  "stepId": "47795675-0473-4900-b844-7e1a435e8555",
+  "stepContextName": "__actions_checkout",
+  "hasPreStep": false,
+  "hasPostStep": true,
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 2,
+  "startTime": "2025-08-31T05:58:41.0004256Z",
+  "finishTime": "2025-08-31T05:58:42.0905273Z"
+}.
+[2025-08-31 05:58:42Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2025-08-31 05:58:42Z INFO StepsRunner] Current state: job state = ''
+[2025-08-31 05:58:42Z INFO StepsRunner] Processing step: DisplayName='Backup current version'
+[2025-08-31 05:58:42Z INFO StepsRunner] Evaluating: success()
+[2025-08-31 05:58:42Z INFO StepsRunner] Result: true
+[2025-08-31 05:58:42Z INFO StepsRunner] Starting the step.
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:42Z INFO ExecutionContext] Write event payload to /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_github_workflow/event.json
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:42Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2025-08-31 05:58:42Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command set-env
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command set-output
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command save-state
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command add-path
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command warning
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command error
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command notice
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command debug
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command group
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command echo
+[2025-08-31 05:58:42Z INFO ScriptHandler] Which2: 'bash'
+[2025-08-31 05:58:42Z INFO ScriptHandler] Location: '/usr/bin/bash'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:42Z INFO ScriptHandler] Which2: 'bash'
+[2025-08-31 05:58:42Z INFO ScriptHandler] Location: '/usr/bin/bash'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] Starting process:
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   File name: '/usr/bin/bash'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Arguments: '-e /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/8efb7fa2-2a23-4659-8dda-41441afc3bff.sh'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Working directory: '/home/ec2-user/environment/aws_automation/actions-runner/_work/terraform_aws/terraform_aws'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] Updated oom_score_adj to 500 for PID: 10093.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] Process started with process id 10093, waiting for process exit.
+[2025-08-31 05:58:42Z INFO JobServerQueue] Try to append 1 batches web console lines for record '47795675-0473-4900-b844-7e1a435e8555', success rate: 1/1.
+[2025-08-31 05:58:42Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'cbb1ac7f-a98c-443a-a547-e65336def242', success rate: 1/1.
+[2025-08-31 05:58:42Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2025-08-31 05:58:42Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] Finished process 10093 with exit code 0, and elapsed time 00:00:00.5800445.
+[2025-08-31 05:58:42Z INFO CreateStepSummaryCommand] Step Summary file (/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_runner_file_commands/step_summary_037759a9-50bd-4ef6-93f5-5da01af2a078) is empty; skipping attachment upload
+[2025-08-31 05:58:42Z INFO StepsRunner] Step result: 
+[2025-08-31 05:58:42Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "sh",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "cbb1ac7f-a98c-443a-a547-e65336def242",
+  "stepContextName": "__run",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 1,
+  "startTime": "2025-08-31T05:58:42.0928575Z",
+  "finishTime": "2025-08-31T05:58:42.7014524Z"
+}.
+[2025-08-31 05:58:42Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2025-08-31 05:58:42Z INFO StepsRunner] Current state: job state = ''
+[2025-08-31 05:58:42Z INFO StepsRunner] Processing step: DisplayName='Allow Git safe.directory'
+[2025-08-31 05:58:42Z INFO StepsRunner] Evaluating: success()
+[2025-08-31 05:58:42Z INFO StepsRunner] Result: true
+[2025-08-31 05:58:42Z INFO StepsRunner] Starting the step.
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:42Z INFO ExecutionContext] Write event payload to /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_github_workflow/event.json
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:42Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2025-08-31 05:58:42Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command set-env
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command set-output
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command save-state
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command add-path
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command warning
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command error
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command notice
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command debug
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command group
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command echo
+[2025-08-31 05:58:42Z INFO ScriptHandler] Which2: 'bash'
+[2025-08-31 05:58:42Z INFO ScriptHandler] Location: '/usr/bin/bash'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:42Z INFO ScriptHandler] Which2: 'bash'
+[2025-08-31 05:58:42Z INFO ScriptHandler] Location: '/usr/bin/bash'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] Starting process:
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   File name: '/usr/bin/bash'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Arguments: '-e /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/02179cb9-7c3b-4dab-aeb1-a4f2529879dd.sh'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Working directory: '/home/ec2-user/environment/aws_automation/actions-runner/_work/terraform_aws/terraform_aws'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] Updated oom_score_adj to 500 for PID: 10103.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] Process started with process id 10103, waiting for process exit.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] Finished process 10103 with exit code 0, and elapsed time 00:00:00.0646523.
+[2025-08-31 05:58:42Z INFO CreateStepSummaryCommand] Step Summary file (/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_runner_file_commands/step_summary_2a32e74d-b364-427f-9e62-c6fbd3a6f091) is empty; skipping attachment upload
+[2025-08-31 05:58:42Z INFO StepsRunner] Step result: 
+[2025-08-31 05:58:42Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "sh",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "72568bfe-9db8-4f3f-8144-7a71ee77157d",
+  "stepContextName": "__run_2",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 1,
+  "startTime": "2025-08-31T05:58:42.7034384Z",
+  "finishTime": "2025-08-31T05:58:42.7790939Z"
+}.
+[2025-08-31 05:58:42Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2025-08-31 05:58:42Z INFO StepsRunner] Current state: job state = ''
+[2025-08-31 05:58:42Z INFO StepsRunner] Processing step: DisplayName='Update /var/www/html with git reset and pull --rebase'
+[2025-08-31 05:58:42Z INFO StepsRunner] Evaluating: success()
+[2025-08-31 05:58:42Z INFO StepsRunner] Result: true
+[2025-08-31 05:58:42Z INFO StepsRunner] Starting the step.
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:42Z INFO ExecutionContext] Write event payload to /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_github_workflow/event.json
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:42Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2025-08-31 05:58:42Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command set-env
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command set-output
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command save-state
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command add-path
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command warning
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command error
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command notice
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command debug
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command group
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2025-08-31 05:58:42Z INFO ActionCommandManager] Register action command extension for command echo
+[2025-08-31 05:58:42Z INFO ScriptHandler] Which2: 'bash'
+[2025-08-31 05:58:42Z INFO ScriptHandler] Location: '/usr/bin/bash'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:42Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:42Z INFO ScriptHandler] Which2: 'bash'
+[2025-08-31 05:58:42Z INFO ScriptHandler] Location: '/usr/bin/bash'
+[2025-08-31 05:58:42Z INFO JobServerQueue] Try to append 1 batches web console lines for record '72568bfe-9db8-4f3f-8144-7a71ee77157d', success rate: 1/1.
+[2025-08-31 05:58:42Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e82831f1-db66-4771-800e-0d763b0a1746', success rate: 1/1.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] Starting process:
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   File name: '/usr/bin/bash'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Arguments: '-e /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/6848a910-deac-41cd-bbef-aa48488639ef.sh'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Working directory: '/home/ec2-user/environment/aws_automation/actions-runner/_work/terraform_aws/terraform_aws'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] Updated oom_score_adj to 500 for PID: 10109.
+[2025-08-31 05:58:42Z INFO ProcessInvokerWrapper] Process started with process id 10109, waiting for process exit.
+[2025-08-31 05:58:43Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e82831f1-db66-4771-800e-0d763b0a1746', success rate: 1/1.
+[2025-08-31 05:58:43Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-08-31 05:58:43Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, /home/ec2-user/environment/aws_automation/actions-runner/_diag/blocks/40934935-9e0b-4cf0-936c-40e45c4579d9_47795675-0473-4900-b844-7e1a435e8555.1
+[2025-08-31 05:58:43Z INFO JobServerQueue] Try to upload 2 log files or attachments, success rate: 2/2.
+[2025-08-31 05:58:43Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-08-31 05:58:43Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, /home/ec2-user/environment/aws_automation/actions-runner/_diag/blocks/40934935-9e0b-4cf0-936c-40e45c4579d9_cbb1ac7f-a98c-443a-a547-e65336def242.1
+[2025-08-31 05:58:44Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-08-31 05:58:44Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, /home/ec2-user/environment/aws_automation/actions-runner/_diag/blocks/40934935-9e0b-4cf0-936c-40e45c4579d9_72568bfe-9db8-4f3f-8144-7a71ee77157d.1
+[2025-08-31 05:58:45Z INFO JobServerQueue] Tried to upload 3 file(s) to results, success rate: 3/3.
+[2025-08-31 05:58:45Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e82831f1-db66-4771-800e-0d763b0a1746', success rate: 1/1.
+[2025-08-31 05:58:45Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e82831f1-db66-4771-800e-0d763b0a1746', success rate: 1/1.
+[2025-08-31 05:58:45Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e82831f1-db66-4771-800e-0d763b0a1746', success rate: 1/1.
+[2025-08-31 05:58:46Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e82831f1-db66-4771-800e-0d763b0a1746', success rate: 1/1.
+[2025-08-31 05:58:46Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e82831f1-db66-4771-800e-0d763b0a1746', success rate: 1/1.
+[2025-08-31 05:58:46Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e82831f1-db66-4771-800e-0d763b0a1746', success rate: 1/1.
+[2025-08-31 05:58:46Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e82831f1-db66-4771-800e-0d763b0a1746', success rate: 1/1.
+[2025-08-31 05:58:47Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e82831f1-db66-4771-800e-0d763b0a1746', success rate: 1/1.
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper] Finished process 10109 with exit code 0, and elapsed time 00:00:05.4416291.
+[2025-08-31 05:58:48Z INFO CreateStepSummaryCommand] Step Summary file (/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_runner_file_commands/step_summary_b0e5fb3d-1dd4-4230-8e7d-27df6787781e) is empty; skipping attachment upload
+[2025-08-31 05:58:48Z INFO StepsRunner] Step result: 
+[2025-08-31 05:58:48Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "sh",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "e82831f1-db66-4771-800e-0d763b0a1746",
+  "stepContextName": "__run_3",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 6,
+  "startTime": "2025-08-31T05:58:42.7811654Z",
+  "finishTime": "2025-08-31T05:58:48.2387721Z"
+}.
+[2025-08-31 05:58:48Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2025-08-31 05:58:48Z INFO StepsRunner] Current state: job state = ''
+[2025-08-31 05:58:48Z INFO StepsRunner] Processing step: DisplayName='Set permissions back to Apache'
+[2025-08-31 05:58:48Z INFO StepsRunner] Evaluating: success()
+[2025-08-31 05:58:48Z INFO StepsRunner] Result: true
+[2025-08-31 05:58:48Z INFO StepsRunner] Starting the step.
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:48Z INFO ExecutionContext] Write event payload to /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_github_workflow/event.json
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:48Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2025-08-31 05:58:48Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command set-env
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command set-output
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command save-state
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command add-path
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command warning
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command error
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command notice
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command debug
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command group
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command echo
+[2025-08-31 05:58:48Z INFO ScriptHandler] Which2: 'bash'
+[2025-08-31 05:58:48Z INFO ScriptHandler] Location: '/usr/bin/bash'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:48Z INFO ScriptHandler] Which2: 'bash'
+[2025-08-31 05:58:48Z INFO ScriptHandler] Location: '/usr/bin/bash'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper] Starting process:
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   File name: '/usr/bin/bash'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Arguments: '-e /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/3bd34165-8cd4-4b18-96c1-0c81847024e9.sh'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Working directory: '/home/ec2-user/environment/aws_automation/actions-runner/_work/terraform_aws/terraform_aws'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper] Updated oom_score_adj to 500 for PID: 10183.
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper] Process started with process id 10183, waiting for process exit.
+[2025-08-31 05:58:48Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e82831f1-db66-4771-800e-0d763b0a1746', success rate: 1/1.
+[2025-08-31 05:58:48Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'a9e8ff18-b8e1-47ef-8f21-ef19846dfcff', success rate: 1/1.
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper] Finished process 10183 with exit code 0, and elapsed time 00:00:00.2854832.
+[2025-08-31 05:58:48Z INFO CreateStepSummaryCommand] Step Summary file (/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_runner_file_commands/step_summary_cf2deca5-095f-4e7d-86bd-edbfe9a37817) is empty; skipping attachment upload
+[2025-08-31 05:58:48Z INFO StepsRunner] Step result: 
+[2025-08-31 05:58:48Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "sh",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "a9e8ff18-b8e1-47ef-8f21-ef19846dfcff",
+  "stepContextName": "__run_4",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 1,
+  "startTime": "2025-08-31T05:58:48.2405339Z",
+  "finishTime": "2025-08-31T05:58:48.5335482Z"
+}.
+[2025-08-31 05:58:48Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2025-08-31 05:58:48Z INFO StepsRunner] Current state: job state = ''
+[2025-08-31 05:58:48Z INFO StepsRunner] Processing step: DisplayName='Restart Apache'
+[2025-08-31 05:58:48Z INFO StepsRunner] Evaluating: success()
+[2025-08-31 05:58:48Z INFO StepsRunner] Result: true
+[2025-08-31 05:58:48Z INFO StepsRunner] Starting the step.
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:48Z INFO ExecutionContext] Write event payload to /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_github_workflow/event.json
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:48Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2025-08-31 05:58:48Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command set-env
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command set-output
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command save-state
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command add-path
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command warning
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command error
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command notice
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command debug
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command group
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2025-08-31 05:58:48Z INFO ActionCommandManager] Register action command extension for command echo
+[2025-08-31 05:58:48Z INFO ScriptHandler] Which2: 'bash'
+[2025-08-31 05:58:48Z INFO ScriptHandler] Location: '/usr/bin/bash'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:48Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:48Z INFO ScriptHandler] Which2: 'bash'
+[2025-08-31 05:58:48Z INFO ScriptHandler] Location: '/usr/bin/bash'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper] Starting process:
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   File name: '/usr/bin/bash'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Arguments: '-e /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/f882dde8-e2f3-48f4-8436-ef9fa731de3a.sh'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Working directory: '/home/ec2-user/environment/aws_automation/actions-runner/_work/terraform_aws/terraform_aws'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper] Updated oom_score_adj to 500 for PID: 10192.
+[2025-08-31 05:58:48Z INFO ProcessInvokerWrapper] Process started with process id 10192, waiting for process exit.
+[2025-08-31 05:58:48Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'c924047a-c6d2-4ea3-bde4-c0d7d84f6346', success rate: 1/1.
+[2025-08-31 05:58:48Z INFO JobServerQueue] Try to upload 2 log files or attachments, success rate: 2/2.
+[2025-08-31 05:58:49Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-08-31 05:58:49Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, /home/ec2-user/environment/aws_automation/actions-runner/_diag/blocks/40934935-9e0b-4cf0-936c-40e45c4579d9_e82831f1-db66-4771-800e-0d763b0a1746.1
+[2025-08-31 05:58:49Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-08-31 05:58:49Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, /home/ec2-user/environment/aws_automation/actions-runner/_diag/blocks/40934935-9e0b-4cf0-936c-40e45c4579d9_a9e8ff18-b8e1-47ef-8f21-ef19846dfcff.1
+[2025-08-31 05:58:49Z INFO JobServerQueue] Tried to upload 2 file(s) to results, success rate: 2/2.
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper] Finished process 10192 with exit code 0, and elapsed time 00:00:01.2323973.
+[2025-08-31 05:58:49Z INFO CreateStepSummaryCommand] Step Summary file (/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_runner_file_commands/step_summary_be4e282c-5561-4d6c-9f97-a8169b320eb2) is empty; skipping attachment upload
+[2025-08-31 05:58:49Z INFO StepsRunner] Step result: 
+[2025-08-31 05:58:49Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "sh",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "c924047a-c6d2-4ea3-bde4-c0d7d84f6346",
+  "stepContextName": "__run_5",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 2,
+  "startTime": "2025-08-31T05:58:48.5348328Z",
+  "finishTime": "2025-08-31T05:58:49.7782527Z"
+}.
+[2025-08-31 05:58:49Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2025-08-31 05:58:49Z INFO StepsRunner] Current state: job state = ''
+[2025-08-31 05:58:49Z INFO StepsRunner] Processing step: DisplayName='Rollback on failure'
+[2025-08-31 05:58:49Z INFO StepsRunner] Evaluating: failure()
+[2025-08-31 05:58:49Z INFO StepsRunner] Result: false
+[2025-08-31 05:58:49Z INFO StepsRunner] Skipping step due to condition evaluation.
+[2025-08-31 05:58:49Z INFO StepsRunner] No need for updating job result with current step result 'Skipped'.
+[2025-08-31 05:58:49Z INFO StepsRunner] Current state: job state = ''
+[2025-08-31 05:58:49Z INFO StepsRunner] Processing step: DisplayName='Post Checkout repository (for local reference)'
+[2025-08-31 05:58:49Z INFO StepsRunner] Evaluating: always()
+[2025-08-31 05:58:49Z INFO StepsRunner] Result: true
+[2025-08-31 05:58:49Z INFO StepsRunner] Starting the step.
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Actions': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions'
+[2025-08-31 05:58:49Z INFO ActionManager] Load action that reference repository from '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions/actions/checkout/v4'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Actions': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions'
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2025-08-31 05:58:49Z INFO ActionManager] Action pre node.js file: N/A.
+[2025-08-31 05:58:49Z INFO ActionManager] Action node.js file: dist/index.js.
+[2025-08-31 05:58:49Z INFO ActionManager] Action post node.js file: dist/index.js.
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:49Z INFO ExecutionContext] Write event payload to /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_github_workflow/event.json
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Work': '/home/ec2-user/environment/aws_automation/actions-runner/_work'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Temp': '/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp'
+[2025-08-31 05:58:49Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'repository': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 6,
+  "col": 14,
+  "lit": "endrycofr/terraform_aws"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'ref': default value evaluate result: ""
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'token': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 24,
+  "col": 14,
+  "lit": "***"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'ssh-key': default value evaluate result: ""
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'ssh-known-hosts': default value evaluate result: ""
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'ssh-strict': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 47,
+  "col": 14,
+  "lit": "true"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'ssh-user': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 51,
+  "col": 14,
+  "lit": "git"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'persist-credentials': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 54,
+  "col": 14,
+  "lit": "true"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'path': default value evaluate result: ""
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'clean': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 59,
+  "col": 14,
+  "lit": "true"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'filter': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 64,
+  "col": 14,
+  "lit": ""
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'sparse-checkout': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 69,
+  "col": 14,
+  "lit": ""
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'sparse-checkout-cone-mode': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 73,
+  "col": 14,
+  "lit": "true"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'fetch-depth': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 76,
+  "col": 14,
+  "lit": "1"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'fetch-tags': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 79,
+  "col": 14,
+  "lit": "false"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'show-progress': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 82,
+  "col": 14,
+  "lit": "true"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'lfs': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 85,
+  "col": 14,
+  "lit": "false"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'submodules': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 94,
+  "col": 14,
+  "lit": "false"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'set-safe-directory': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 97,
+  "col": 14,
+  "lit": "true"
+}
+[2025-08-31 05:58:49Z INFO ActionManifestManager] Input 'github-server-url': default value evaluate result: ""
+[2025-08-31 05:58:49Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command set-env
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command set-output
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command save-state
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command add-path
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command warning
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command error
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command notice
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command debug
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command group
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2025-08-31 05:58:49Z INFO ActionCommandManager] Register action command extension for command echo
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:49Z INFO HostContext] Well known directory 'Externals': '/home/ec2-user/environment/aws_automation/actions-runner/externals'
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper] Starting process:
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper]   File name: '/home/ec2-user/environment/aws_automation/actions-runner/externals/node20/bin/node'
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper]   Arguments: '"/home/ec2-user/environment/aws_automation/actions-runner/_work/_actions/actions/checkout/v4/dist/index.js"'
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper]   Working directory: '/home/ec2-user/environment/aws_automation/actions-runner/_work/terraform_aws/terraform_aws'
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper] Updated oom_score_adj to 500 for PID: 10379.
+[2025-08-31 05:58:49Z INFO ProcessInvokerWrapper] Process started with process id 10379, waiting for process exit.
+[2025-08-31 05:58:49Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'a20336e6-6e75-466a-b536-264d53743bbc', success rate: 1/1.
+[2025-08-31 05:58:49Z INFO AddMaskCommandExtension] Add new secret mask with length of 32
+[2025-08-31 05:58:50Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:50Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-08-31 05:58:50Z INFO ProcessInvokerWrapper] Finished process 10379 with exit code 0, and elapsed time 00:00:00.3058586.
+[2025-08-31 05:58:50Z INFO CreateStepSummaryCommand] Step Summary file (/home/ec2-user/environment/aws_automation/actions-runner/_work/_temp/_runner_file_commands/step_summary_fdc5fea9-171c-4cc2-8c44-d9b51883d807) is empty; skipping attachment upload
+[2025-08-31 05:58:50Z INFO StepsRunner] Step result: 
+[2025-08-31 05:58:50Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "actions/checkout",
+  "ref": "v4",
+  "type": "node20",
+  "stage": "Post",
+  "stepId": "a20336e6-6e75-466a-b536-264d53743bbc",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 1,
+  "startTime": "2025-08-31T05:58:49.7838799Z",
+  "finishTime": "2025-08-31T05:58:50.1102448Z"
+}.
+[2025-08-31 05:58:50Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2025-08-31 05:58:50Z INFO StepsRunner] Current state: job state = ''
+[2025-08-31 05:58:50Z INFO JobRunner] Finalize job.
+[2025-08-31 05:58:50Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:50Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:50Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:50Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:50Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:50Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:50Z INFO JobExtension] Initialize Env context
+[2025-08-31 05:58:50Z INFO JobExtension] Initialize steps context
+[2025-08-31 05:58:50Z INFO JobExtension] Total accessible running process: 141.
+[2025-08-31 05:58:50Z INFO JobExtension] Inspecting process environment variables. PID: 4978 (kworker/0:2-xfs-conv/nvme0n1p1)
+[2025-08-31 05:58:50Z INFO LinuxProcessExtensions] Read env from /proc/4978/environ
+[2025-08-31 05:58:50Z WARN JobExtension] Ignore exception during read process environment variables: Access to the path '/proc/4978/environ' is denied.
+[2025-08-31 05:58:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'a20336e6-6e75-466a-b536-264d53743bbc', success rate: 1/1.
+[2025-08-31 05:58:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'f007e87d-cd65-4d7b-907a-a3f30a997d00', success rate: 1/1.
+[2025-08-31 05:58:50Z INFO JobExtension] Inspecting process environment variables. PID: 7717 (kworker/1:3-xfs-conv/nvme0n1p1)
+[2025-08-31 05:58:50Z INFO LinuxProcessExtensions] Read env from /proc/7717/environ
+[2025-08-31 05:58:50Z WARN JobExtension] Ignore exception during read process environment variables: Access to the path '/proc/7717/environ' is denied.
+[2025-08-31 05:58:50Z INFO JobExtension] Inspecting process environment variables. PID: 8848 (kworker/u4:3-writeback)
+[2025-08-31 05:58:50Z INFO LinuxProcessExtensions] Read env from /proc/8848/environ
+[2025-08-31 05:58:50Z WARN JobExtension] Ignore exception during read process environment variables: Access to the path '/proc/8848/environ' is denied.
+[2025-08-31 05:58:50Z INFO JobExtension] Inspecting process environment variables. PID: 9118 (kworker/1:1-xfs-conv/nvme0n1p1)
+[2025-08-31 05:58:50Z INFO LinuxProcessExtensions] Read env from /proc/9118/environ
+[2025-08-31 05:58:50Z WARN JobExtension] Ignore exception during read process environment variables: Access to the path '/proc/9118/environ' is denied.
+[2025-08-31 05:58:50Z INFO JobExtension] Inspecting process environment variables. PID: 10121 (kworker/0:0-cgroup_destroy)
+[2025-08-31 05:58:50Z INFO LinuxProcessExtensions] Read env from /proc/10121/environ
+[2025-08-31 05:58:50Z WARN JobExtension] Ignore exception during read process environment variables: Access to the path '/proc/10121/environ' is denied.
+[2025-08-31 05:58:50Z INFO JobExtension] Inspecting process environment variables. PID: 10122 (kworker/1:2-events)
+[2025-08-31 05:58:50Z INFO LinuxProcessExtensions] Read env from /proc/10122/environ
+[2025-08-31 05:58:50Z WARN JobExtension] Ignore exception during read process environment variables: Access to the path '/proc/10122/environ' is denied.
+[2025-08-31 05:58:50Z INFO JobExtension] Inspecting process environment variables. PID: 10199 (httpd)
+[2025-08-31 05:58:50Z INFO LinuxProcessExtensions] Read env from /proc/10199/environ
+[2025-08-31 05:58:50Z WARN JobExtension] Ignore exception during read process environment variables: Access to the path '/proc/10199/environ' is denied.
+[2025-08-31 05:58:50Z INFO JobExtension] Inspecting process environment variables. PID: 10200 (httpd)
+[2025-08-31 05:58:50Z INFO LinuxProcessExtensions] Read env from /proc/10200/environ
+[2025-08-31 05:58:50Z WARN JobExtension] Ignore exception during read process environment variables: Access to the path '/proc/10200/environ' is denied.
+[2025-08-31 05:58:50Z INFO JobExtension] Inspecting process environment variables. PID: 10201 (httpd)
+[2025-08-31 05:58:50Z INFO LinuxProcessExtensions] Read env from /proc/10201/environ
+[2025-08-31 05:58:50Z WARN JobExtension] Ignore exception during read process environment variables: Access to the path '/proc/10201/environ' is denied.
+[2025-08-31 05:58:50Z INFO JobExtension] Inspecting process environment variables. PID: 10202 (httpd)
+[2025-08-31 05:58:50Z INFO LinuxProcessExtensions] Read env from /proc/10202/environ
+[2025-08-31 05:58:50Z WARN JobExtension] Ignore exception during read process environment variables: Access to the path '/proc/10202/environ' is denied.
+[2025-08-31 05:58:50Z INFO JobExtension] Inspecting process environment variables. PID: 10203 (httpd)
+[2025-08-31 05:58:50Z INFO LinuxProcessExtensions] Read env from /proc/10203/environ
+[2025-08-31 05:58:50Z WARN JobExtension] Ignore exception during read process environment variables: Access to the path '/proc/10203/environ' is denied.
+[2025-08-31 05:58:50Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "complete_job",
+  "type": "runner",
+  "stage": "Post",
+  "stepId": "f007e87d-cd65-4d7b-907a-a3f30a997d00",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 1,
+  "startTime": "2025-08-31T05:58:50.1186201Z",
+  "finishTime": "2025-08-31T05:58:50.1882619Z"
+}.
+[2025-08-31 05:58:50Z INFO JobRunner] Job result after all job steps finish: Succeeded
+[2025-08-31 05:58:50Z INFO JobRunner] Completing the job execution context.
+[2025-08-31 05:58:50Z INFO JobRunner] Shutting down the job server queue.
+[2025-08-31 05:58:50Z INFO JobServerQueue] Fire signal to shutdown all queues.
+[2025-08-31 05:58:50Z INFO JobServerQueue] All queue process task stopped.
+[2025-08-31 05:58:50Z INFO JobServerQueue] Web console line queue drained.
+[2025-08-31 05:58:50Z INFO JobServerQueue] Uploading 4 files in one shot.
+[2025-08-31 05:58:50Z INFO JobServerQueue] Try to upload 4 log files or attachments, success rate: 4/4.
+[2025-08-31 05:58:50Z INFO JobServerQueue] File upload queue drained.
+[2025-08-31 05:58:50Z INFO JobServerQueue] Starting results-based upload queue...
+[2025-08-31 05:58:50Z INFO JobServerQueue] Uploading 4 file(s) in one shot through results service.
+[2025-08-31 05:58:50Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-08-31 05:58:50Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, /home/ec2-user/environment/aws_automation/actions-runner/_diag/blocks/40934935-9e0b-4cf0-936c-40e45c4579d9_c924047a-c6d2-4ea3-bde4-c0d7d84f6346.1
+[2025-08-31 05:58:50Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-08-31 05:58:50Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, /home/ec2-user/environment/aws_automation/actions-runner/_diag/blocks/40934935-9e0b-4cf0-936c-40e45c4579d9_a20336e6-6e75-466a-b536-264d53743bbc.1
+[2025-08-31 05:58:51Z INFO JobServerQueue] Got a step log file to send to results service.
+[2025-08-31 05:58:51Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, /home/ec2-user/environment/aws_automation/actions-runner/_diag/blocks/40934935-9e0b-4cf0-936c-40e45c4579d9_f007e87d-cd65-4d7b-907a-a3f30a997d00.1
+[2025-08-31 05:58:51Z INFO JobServerQueue] Got a job log file to send to results service.
+[2025-08-31 05:58:51Z INFO JobServerQueue] Starting upload of job log file to results service ResultsLog, /home/ec2-user/environment/aws_automation/actions-runner/_diag/blocks/40934935-9e0b-4cf0-936c-40e45c4579d9_4304cc68-9d78-57ac-af2c-e25a62db39b2.1
+[2025-08-31 05:58:51Z INFO JobServerQueue] Tried to upload 4 file(s) to results, success rate: 4/4.
+[2025-08-31 05:58:51Z INFO JobServerQueue] Results upload queue drained.
+[2025-08-31 05:58:51Z INFO JobServerQueue] Timeline update queue drained.
+[2025-08-31 05:58:51Z INFO JobServerQueue] Disposing job server ...
+[2025-08-31 05:58:51Z INFO JobServerQueue] Disposing results server ...
+[2025-08-31 05:58:51Z INFO JobServerQueue] All queue process tasks have been stopped, and all queues are drained.
+[2025-08-31 05:58:51Z INFO TempDirectoryManager] Cleaning runner temp folder: /home/ec2-user/environment/aws_automation/actions-runner/_work/_temp
+[2025-08-31 05:58:51Z INFO HostContext] Well known directory 'Bin': '/home/ec2-user/environment/aws_automation/actions-runner/bin'
+[2025-08-31 05:58:51Z INFO HostContext] Well known directory 'Root': '/home/ec2-user/environment/aws_automation/actions-runner'
+[2025-08-31 05:58:51Z INFO HostContext] Well known directory 'Diag': '/home/ec2-user/environment/aws_automation/actions-runner/_diag'
+[2025-08-31 05:58:51Z INFO HostContext] Well known config file 'Telemetry': '/home/ec2-user/environment/aws_automation/actions-runner/_diag/.telemetry'
+[2025-08-31 05:58:51Z INFO JobRunner] Raising job completed against run service
+[2025-08-31 05:58:52Z INFO Worker] Job completed.
