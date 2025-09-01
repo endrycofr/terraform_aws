@@ -71,3 +71,8 @@ terraform destroy -auto-approve
 
 ![Arsitektur](docs/architecture.png)
 
+
+📖 **Artikel penjelasan dan langkah-langkah Lengkap**:
+- [Membangun dan Mengelola EC2 AWS Secara Otomatis dengan Terraform](https://medium.com/@endrycofarelr/membangun-dan-mengelola-ec2-aws-secara-otomatis-dengan-terraform-ff028534d5de)  
+- [Automating AWS Web Deployments with Terraform and GitHub Action](https://medium.com/@endrycofarelr/automating-aws-web-deployments-with-terraform-and-github-action-500f6fa9ff15)
+
