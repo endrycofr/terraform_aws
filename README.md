@@ -71,14 +71,3 @@ terraform destroy -auto-approve
 
 ![Arsitektur](docs/architecture.png)
 
-## Lisensi
-
-Proyek ini menggunakan lisensi **MIT**.
-
-```
-
----
-
-Kalau mau, saya bisa langsung sesuaikan **README.md** ini berdasarkan isi file di repo `terraform_aws` supaya lebih akurat.  
-Mau saya ambilkan dulu struktur file dan resource dari repo Anda biar README-nya presisi?
-```
