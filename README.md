@@ -69,8 +69,7 @@ terraform destroy -auto-approve
 
 ## Arsitektur
 
-![Arsitektur](terraform_aws
-/img/arsitektur-terraform.png)
+![Arsitektur](terraform_aws/img/arsitektur-terraform.png)
 
 
 📖 **Artikel penjelasan dan langkah-langkah Lengkap**:
