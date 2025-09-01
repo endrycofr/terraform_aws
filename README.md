@@ -1,14 +1,9 @@
 
----
-
-```markdown
 # Terraform AWS
 
 ## Deskripsi
 Repositori ini berisi konfigurasi **Terraform** untuk membangun infrastruktur di **Amazon Web Services (AWS)**.  
 Contoh infrastruktur yang dapat dibangun: EC2 Instance, Security Group, dan konfigurasi dasar server menggunakan `user_data`.
-
-````
 
 ## Prasyarat
 - **Terraform** versi >= 1.5.0
