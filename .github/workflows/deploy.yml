@@ -1,4 +1,4 @@
-name: Deploy to EC2 via SSH
+name: Safe Deploy to EC2 via SSH
 
 on:
   push:
@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Pastikan tidak mencoba mengupdate submodules
+          submodules: false
 
       - name: Setup SSH key
         run: |
